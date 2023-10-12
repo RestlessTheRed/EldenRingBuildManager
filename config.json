@@ -1,0 +1,9 @@
+{
+  "ACCESS_TOKEN": "",
+  "CLIENT_ID": "",
+  "BOT_NICK": "",
+  "BOT_PREFIX": "!",
+  "CHANNEL": "",
+  "ER_INVENTORY_TOKEN": "",
+  "ER_INVENTORY_API_URL": "https://er-inventory-api.nyasu.business/inventories"
+}
