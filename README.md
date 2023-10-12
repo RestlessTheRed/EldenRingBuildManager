@@ -27,7 +27,7 @@ Here's an example of how a complete config file might look:
 }
 ```
 
-Additionally, you can change the **BOT_PREFIX** value if you want. The default is `!`, which means that commands need to be prefaced with an exclamation mark to work. This is, however, a standard for Twitch so I would not recommend it.
+Additionally, you can change the **BOT_PREFIX** value if you want. The default is `!`, which means that commands need to be prefaced with an exclamation mark to work. This is, however, standard for Twitch, so I would not recommend changing it.
 
 You don't need to change the values of the **ER_INVENTORY_AUTH_TOKEN** and **ER_INVENTORY_API_URL** variables. Leave them as is.
 
