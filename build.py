@@ -39,7 +39,7 @@ class Build:
         res = requests.get(
             url=api_url,
             headers={
-                'Authorization': f'{os.environ["ER_INVENTORY_TOKEN"]}',
+                'Authorization': f'{os.environ["ER_INVENTORY_AUTH_TOKEN"]}',
                 'Content-Type': 'application/json; charset=utf-8',
             },
         ).json()

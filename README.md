@@ -9,10 +9,11 @@ To set up the bot, you need to fill in the necessary values in `config.json`. He
 1. (Optional) If you want the bot to use a dedicated Twitch account, create one. You will need to give this account moderator privileges in your chat. You can also you your own account for the same purposes.
 2. [Request an OAuth code](https://twitchapps.com/tmi/) for the account. You will need to log in and give the app permissions to generate it for you.
 3. [Register your app with Twitch dev](https://dev.twitch.tv/console/apps/create) and request a client-id (so you can interface with Twitch's API). You can choose whatever name for the app, paste ` http://localhost` in the **OAuth Redirect URLs** field and choose the category _Chat Bot_.
-4. (Optional) If you want the integration with [Emilia](https://github.com/sovietspaceship)'s website to work, you need to use your auth token. The easiest way to see it is by clicking **Browse**, typing in your name in the **User** field, and clicking on it on any of your builds. The URL of the opened page will look like something along these lines: `https://er-inventory.nyasu.business/browse/95f3ed89-f0c4-4675-b591-722cb5e9fcdf`. You need to copy the `95f3ed89-f0c4-4675-b591-722cb5e9fcdf`, this is gonna your personal auth token (I pasted mine just for reference).
-5. Now, fill in the values in the `config.json`. **ACCESS_TOKEN** is the token you obtained in point 2. **CLIENT_ID** is the ID you obtained in point 3. **BOT_NICK** is the username of the bot account on Twitch (or your own). **CHANNEL** is the name of the channel where you intend to use the bot. Finally, **ER_INVENTORY_TOKEN** is the token you obtained in point 4.
+4. (Optional) If you want the `!builds` command to work, the bot needs to know your user id on [Emilia](https://github.com/sovietspaceship)'s website. The easiest way to see it is by clicking on the cogwheel icon in the upper-right corner. It will open Settings. The UID will be at the bottom of this page. Here's the [link](https://er-inventory.nyasu.business/settings).
+5. If for whatever reason you don't want the `!builds` command to work (for instance, you don't have any public builds on the website), simply remove this entry from the `config.json` file.
+5. Now, fill in the values in the `config.json`. **ACCESS_TOKEN** is the token you obtained in point 2. **CLIENT_ID** is the ID you obtained in point 3. **BOT_NICK** is the username of the bot account on Twitch (or your own). **CHANNEL** is the name of the channel where you intend to use the bot. Finally, **ER_INVENTORY_USER_ID** is the token you obtained in point 4.
 
-Here's an example of how the complete config file might look:
+Here's an example of how a complete config file might look:
 ```json
 {
   "ACCESS_TOKEN": <...>,
@@ -20,12 +21,15 @@ Here's an example of how the complete config file might look:
   "BOT_NICK": "restless__bot",
   "BOT_PREFIX": "!",
   "CHANNEL": "restless__mind",
-  "ER_INVENTORY_TOKEN": "95f3ed89-f0c4-4675-b591-722cb5e9fcdf",
+  "ER_INVENTORY_USER_ID": "95f3ed89-f0c4-4675-b591-722cb5e9fcdf",
+  "ER_INVENTORY_AUTH_TOKEN": "22ffd4a3-34c0-4989-9ec4-d9590b2e3bb4",
   "ER_INVENTORY_API_URL": "https://er-inventory-api.nyasu.business/inventories"
 }
 ```
 
 Additionally, you can change the **BOT_PREFIX** value if you want. The default is `!`, which means that commands need to be prefaced with an exclamation mark to work. This is, however, a standard for Twitch so I would not recommend it.
+
+You don't need to change the values of **ER_INVENTORY_AUTH_TOKEN** and **ER_INVENTORY_API_URL** variables. Leave them as is.
 
 ## Running
 To run the bot, simply double-click the `run.py` script. You will need to run the bot every time you want to use it.

@@ -32,7 +32,11 @@ class Bot(commands.Bot):
             json.dump({
                 build_name: build.to_json()
                 for build_name, build in self.builds.items()
-            }, fp=f, ensure_ascii=False, indent=4)
+            },
+                fp=f,
+                ensure_ascii=False,
+                indent=4,
+            )
 
     async def event_ready(self):
         print(f'Logged in as {self.nick}. The bot is ready!')
@@ -47,7 +51,7 @@ class Bot(commands.Bot):
         if build_name not in self.builds:
             raise ValueError('A build with this name is not found!')
         del self.builds[build_name]
-        if self.builds[CURRENT_BUILD].name == build_name:
+        if CURRENT_BUILD in self.builds and self.builds[CURRENT_BUILD].name == build_name:
             del self.builds[CURRENT_BUILD]
         self.dump_builds()
 
@@ -128,7 +132,8 @@ class Bot(commands.Bot):
 
     @commands.command()
     async def builds(self, ctx: commands.Context):
-        await ctx.send(
-            f'You can find my public builds here: '
-            f'{"https://er-inventory.nyasu.business/browse/" + os.environ["ER_INVENTORY_TOKEN"]}'
-        )
+        if "ER_INVENTORY_USER_ID" in os.environ:
+            await ctx.send(
+                f'You can find my public builds here: '
+                f'{"https://er-inventory.nyasu.business/browse/" + os.environ["ER_INVENTORY_USER_ID"]}'
+            )
