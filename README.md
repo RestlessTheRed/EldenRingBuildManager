@@ -29,10 +29,10 @@ Here's an example of how a complete config file might look:
 
 Additionally, you can change the **BOT_PREFIX** value if you want. The default is `!`, which means that commands need to be prefaced with an exclamation mark to work. This is, however, a standard for Twitch so I would not recommend it.
 
-You don't need to change the values of **ER_INVENTORY_AUTH_TOKEN** and **ER_INVENTORY_API_URL** variables. Leave them as is.
+You don't need to change the values of the **ER_INVENTORY_AUTH_TOKEN** and **ER_INVENTORY_API_URL** variables. Leave them as is.
 
 ## Running
-To run the bot, simply double-click the `run.py` script. You will need to run the bot every time you want to use it.
+To run the bot, simply double-click the `run.py` script. The bot is not deployed anywhere, so you need to run it on your local machine whenever you want to access it.
 
 You can use the command `!hi` to make sure the bot is connected to your Twitch chat.
 
