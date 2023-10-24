@@ -14,6 +14,7 @@ class Bot(commands.Bot):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.builds = self.load_builds()
+        self.dc_count = 0
 
     @staticmethod
     def load_builds():
@@ -68,7 +69,9 @@ class Bot(commands.Bot):
 
     def get_rune_level(self):
         if CURRENT_BUILD in self.builds:
-            return 'RL' + str(self.builds[CURRENT_BUILD].rune_level)
+            current_build = self.builds[CURRENT_BUILD]
+            return ('RL' + str(current_build.rune_level) +
+                    f' +{current_build.regular_upgrade_level}/+{current_build.somber_upgrade_level}')
         return 'No build set.'
 
     def get_stats(self):
@@ -137,3 +140,20 @@ class Bot(commands.Bot):
                 f'You can find my public builds here: '
                 f'{"https://er-inventory.nyasu.business/browse/" + os.environ["ER_INVENTORY_USER_ID"]}'
             )
+
+    @commands.command()
+    async def setdccount(self, ctx: commands.Context):
+        starting_count: str = ctx.message.content.split()[1]
+        if starting_count.isdigit():
+            self.dc_count = int(starting_count)
+            await ctx.send(f'DC count has been set to {starting_count}.')
+        else:
+            await ctx.send('It seems like the provided value is not a valid number.')
+
+    @commands.command()
+    async def dc(self, ctx: commands.Context):
+        self.dc_count += 1
+        if self.dc_count % 10 == 1 and self.dc_count % 100 != 11:
+            await ctx.send(f'A connection error occurred {self.dc_count} time this stream.')
+            return
+        await ctx.send(f'A connection error occurred {self.dc_count} times this stream.')

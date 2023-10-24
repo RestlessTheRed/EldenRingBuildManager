@@ -9,13 +9,14 @@ class Build:
             self,
             name: str,
             rune_level: Union[int, str],
-            weapon_upgrade_level: Union[int, str],
+            weapon_upgrade_level: Union[int, str],  # Regular weapon upgrade level.
             link: Optional[str] = None,
             stats: Optional[Dict[str, int]] = None,
     ):
         self.name = name
         self.rune_level = int(rune_level)
-        self.weapon_upgrade_level = int(weapon_upgrade_level)
+        self.regular_upgrade_level = int(weapon_upgrade_level)
+        self.somber_upgrade_level = math.ceil(self.regular_upgrade_level / 2.5)
         self.link = link or ''
         self.stats = stats
 
@@ -55,15 +56,14 @@ class Build:
         return {
             'name': self.name,
             'rune_level': self.rune_level,
-            'weapon_upgrade_level': self.weapon_upgrade_level,
+            'weapon_upgrade_level': self.regular_upgrade_level,
             'link': self.link,
             'stats': self.stats,
         }
 
     def print(self):
         rune_level = f'RL{str(self.rune_level)}'
-        somber_upgrade_level = math.ceil(self.weapon_upgrade_level / 2.5)
-        weapon_upgrade_level = f'+{self.weapon_upgrade_level}/+{somber_upgrade_level}'
+        weapon_upgrade_level = f'+{self.regular_upgrade_level}/+{self.somber_upgrade_level}'
         link = f'Link: {self.link}' if self.link else ''
         return ' '.join([
             self.name,
