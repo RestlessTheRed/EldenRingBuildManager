@@ -85,6 +85,8 @@ class Bot(commands.Bot):
 
     @commands.command()
     async def addbuild(self, ctx: commands.Context):
+        if not ctx.author.is_mod:
+            return
         try:
             build = Build.from_url(ctx.message.content)
             self.add_build(build)
@@ -94,6 +96,8 @@ class Bot(commands.Bot):
 
     @commands.command()
     async def addbuildfromtext(self, ctx: commands.Context):
+        if not ctx.author.is_mod:
+            return
         try:
             build = Build.from_text(ctx.message.content)
             self.add_build(build)
@@ -103,6 +107,8 @@ class Bot(commands.Bot):
 
     @commands.command()
     async def removebuild(self, ctx: commands.Context):
+        if not ctx.author.is_mod:
+            return
         build_name = ' '.join(ctx.message.content.split()[1:])
         try:
             self.remove_build(build_name)
@@ -112,6 +118,8 @@ class Bot(commands.Bot):
 
     @commands.command()
     async def setbuild(self, ctx: commands.Context):
+        if not ctx.author.is_mod:
+            return
         build_name = ' '.join(ctx.message.content.split()[1:])
         try:
             self.set_build(build_name)
@@ -143,6 +151,8 @@ class Bot(commands.Bot):
 
     @commands.command()
     async def setdccount(self, ctx: commands.Context):
+        if not ctx.author.is_broadcaster:
+            return
         starting_count: str = ctx.message.content.split()[1]
         if starting_count.isdigit():
             self.dc_count = int(starting_count)
@@ -152,7 +162,8 @@ class Bot(commands.Bot):
 
     @commands.command()
     async def dc(self, ctx: commands.Context):
-        self.dc_count += 1
+        if ctx.author.is_broadcaster:
+            self.dc_count += 1
         if self.dc_count % 10 == 1 and self.dc_count % 100 != 11:
             await ctx.send(f'A connection error occurred {self.dc_count} time this stream.')
             return
