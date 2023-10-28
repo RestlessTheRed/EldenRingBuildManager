@@ -204,6 +204,6 @@ class Bot(commands.Bot):
             self.dc_count[channel_name] += 1
         dc_count = self.dc_count[channel_name]
         if dc_count % 10 == 1 and dc_count % 100 != 11:
-            await ctx.send(f'A connection error occurred {dc_count} time this stream.')
+            await ctx.send(f'A connection error occurred {dc_count} time.')
             return
-        await ctx.send(f'A connection error occurred {dc_count} times this stream.')
+        await ctx.send(f'A connection error occurred {dc_count} times.')
