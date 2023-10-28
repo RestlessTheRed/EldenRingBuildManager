@@ -3,8 +3,8 @@
   "CLIENT_ID": "",
   "BOT_NICK": "",
   "BOT_PREFIX": "!",
-  "CHANNEL": "",
-  "ER_INVENTORY_USER_ID": "",
-  "ER_INVENTORY_AUTH_TOKEN": "22ffd4a3-34c0-4989-9ec4-d9590b2e3bb4",
-  "ER_INVENTORY_API_URL": "https://er-inventory-api.nyasu.business/inventories"
+  "CHANNELS": [],
+  "ER_INVENTORY_USER_IDS": {},
+  "ER_INVENTORY_API_URL": "https://er-inventory-api.nyasu.business/inventories",
+  "ER_INVENTORY_AUTH_TOKEN": "22ffd4a3-34c0-4989-9ec4-d9590b2e3bb4"
 }
