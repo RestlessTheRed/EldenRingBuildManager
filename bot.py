@@ -38,6 +38,9 @@ class Bot(commands.Bot):
     @staticmethod
     def load_builds(channels: Optional[List[str]] = None):
         builds = {}
+        if channels:
+            for channel_name in channels:
+                builds[channel_name] = {}
         with open(BUILDS_FILENAME) as f:
             try:
                 builds_json = json.load(f)
@@ -47,9 +50,6 @@ class Bot(commands.Bot):
             builds[channel_name] = {}
             for build_name, build_info in channel_builds.items():
                 builds[channel_name][build_name] = Build(**build_info)
-        if channels:
-            for channel_name in channels:
-                builds[channel_name] = {}
         return builds
 
     def dump_builds(self):
