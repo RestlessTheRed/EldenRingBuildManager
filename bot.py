@@ -1,6 +1,6 @@
 import json
 import os
-from typing import List
+from typing import List, Optional
 
 from twitchio.ext import commands
 
@@ -29,14 +29,14 @@ class Bot(commands.Bot):
             initial_channels=initial_channels,
             **kwargs
         )
-        self.builds = self.load_builds()
+        self.builds = self.load_builds(channels=initial_channels)
         self.dc_count = {
             channel_name: 0
             for channel_name in initial_channels
         }
 
     @staticmethod
-    def load_builds():
+    def load_builds(channels: Optional[List[str]] = None):
         builds = {}
         with open(BUILDS_FILENAME) as f:
             try:
@@ -47,6 +47,9 @@ class Bot(commands.Bot):
             builds[channel_name] = {}
             for build_name, build_info in channel_builds.items():
                 builds[channel_name][build_name] = Build(**build_info)
+        if channels:
+            for channel_name in channels:
+                builds[channel_name] = {}
         return builds
 
     def dump_builds(self):
