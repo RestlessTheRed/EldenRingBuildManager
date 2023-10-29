@@ -112,7 +112,7 @@ class Bot(commands.Bot):
 
     @commands.command()
     async def addbuild(self, ctx: commands.Context):
-        channel_name = ctx.channel.name
+        channel_name = ctx.channel.name.lower()
         if not ctx.author.is_mod:
             return
         try:
@@ -124,7 +124,7 @@ class Bot(commands.Bot):
 
     @commands.command()
     async def addbuildfromtext(self, ctx: commands.Context):
-        channel_name = ctx.channel.name
+        channel_name = ctx.channel.name.lower()
         if not ctx.author.is_mod:
             return
         try:
@@ -136,7 +136,7 @@ class Bot(commands.Bot):
 
     @commands.command()
     async def removebuild(self, ctx: commands.Context):
-        channel_name = ctx.channel.name
+        channel_name = ctx.channel.name.lower()
         if not ctx.author.is_mod:
             return
         build_name = ' '.join(ctx.message.content.split()[1:])
@@ -148,7 +148,7 @@ class Bot(commands.Bot):
 
     @commands.command()
     async def setbuild(self, ctx: commands.Context):
-        channel_name = ctx.channel.name
+        channel_name = ctx.channel.name.lower()
         if not ctx.author.is_mod:
             return
         build_name = ' '.join(ctx.message.content.split()[1:])
@@ -160,24 +160,24 @@ class Bot(commands.Bot):
 
     @commands.command()
     async def build(self, ctx: commands.Context):
-        channel_name = ctx.channel.name
+        channel_name = ctx.channel.name.lower()
         await ctx.send(self.get_current_build(channel_name))
 
     @commands.command(aliases=['sl'])
     async def rl(self, ctx: commands.Context):
-        channel_name = ctx.channel.name
+        channel_name = ctx.channel.name.lower()
         await ctx.send(self.get_rune_level(channel_name))
 
     @commands.command()
     async def stats(self, ctx: commands.Context):
-        channel_name = ctx.channel.name
+        channel_name = ctx.channel.name.lower()
         stats = self.get_stats(channel_name)
         if stats:
             await ctx.send(stats)
 
     @commands.command()
     async def builds(self, ctx: commands.Context):
-        channel_name = ctx.channel.name
+        channel_name = ctx.channel.name.lower()
         er_inventory_user_id = json.loads(os.environ["ER_INVENTORY_USER_IDS"]).get(channel_name, None)
         if er_inventory_user_id is not None:
             await ctx.send(
@@ -187,7 +187,7 @@ class Bot(commands.Bot):
 
     @commands.command()
     async def setdccount(self, ctx: commands.Context):
-        channel_name = ctx.channel.name
+        channel_name = ctx.channel.name.lower()
         if not ctx.author.is_broadcaster:
             return
         starting_count: str = ctx.message.content.split()[1]
@@ -199,7 +199,7 @@ class Bot(commands.Bot):
 
     @commands.command()
     async def dc(self, ctx: commands.Context):
-        channel_name = ctx.channel.name
+        channel_name = ctx.channel.name.lower()
         if ctx.author.is_broadcaster:
             self.dc_count[channel_name] += 1
         dc_count = self.dc_count[channel_name]

@@ -74,13 +74,14 @@ class Build:
 
     def print_stats(self):
         if self.stats is not None:
-            return 'VIG {} MND {} END {} STR {} DEX {} INT {} FTH {} ARC {}'.format(
-                self.stats['vig'],
-                self.stats['mnd'],
-                self.stats['vit'],
-                self.stats['str'],
-                self.stats['dex'],
-                self.stats['int'],
-                self.stats['fth'],
-                self.stats['arc'],
-            )
+            return 'Vigor: {} Mind: {} Endurance: {} Strength: {} Dexterity: {} Intelligence: {} Faith: {} Arcane {}'.\
+                format(
+                    self.stats['vig'],
+                    self.stats['mnd'],
+                    self.stats['vit'],
+                    self.stats['str'],
+                    self.stats['dex'],
+                    self.stats['int'],
+                    self.stats['fth'],
+                    self.stats['arc'],
+                )

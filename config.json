@@ -1,10 +1,14 @@
 {
-  "ACCESS_TOKEN": "",
-  "CLIENT_ID": "",
-  "BOT_NICK": "",
   "BOT_PREFIX": "!",
-  "CHANNELS": [],
-  "ER_INVENTORY_USER_IDS": {},
+  "CHANNELS": [
+    "restless__mind",
+    "TheOneAbove",
+    "AlterF8",
+    "ungone_"
+  ],
+  "ER_INVENTORY_USER_IDS": {
+    "restless__mind": "95f3ed89-f0c4-4675-b591-722cb5e9fcdf"
+  },
   "ER_INVENTORY_API_URL": "https://er-inventory-api.nyasu.business/inventories",
   "ER_INVENTORY_AUTH_TOKEN": "22ffd4a3-34c0-4989-9ec4-d9590b2e3bb4"
 }
