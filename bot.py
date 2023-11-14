@@ -1,7 +1,6 @@
 from copy import deepcopy
 import json
 import math
-import os
 from typing import Dict, List, Optional, Tuple
 
 from twitchio.ext import commands
@@ -127,6 +126,9 @@ class Bot(commands.Bot):
             return self.builds[channel_name][CURRENT_BUILD].print()
         return 'No build set.'
 
+    def get_build_list(self, channel_name: str):
+        return sorted([build_name for build_name in self.builds[channel_name].keys() if build_name != CURRENT_BUILD])
+
     def get_rune_level(self, channel_name: str):
         if CURRENT_BUILD in self.builds[channel_name]:
             current_build = self.builds[channel_name][CURRENT_BUILD]
@@ -145,9 +147,9 @@ class Bot(commands.Bot):
 
     @commands.command()
     async def addbuild(self, ctx: commands.Context):
-        channel_name = ctx.channel.name.lower()
         if not ctx.author.is_mod:
             return
+        channel_name = ctx.channel.name.lower()
         try:
             build = Build.from_url(ctx.message.content)
             self.add_build(channel_name, build)
@@ -157,9 +159,9 @@ class Bot(commands.Bot):
 
     @commands.command()
     async def addbuildfromtext(self, ctx: commands.Context):
-        channel_name = ctx.channel.name.lower()
         if not ctx.author.is_mod:
             return
+        channel_name = ctx.channel.name.lower()
         try:
             build = Build.from_text(ctx.message.content)
             self.add_build(channel_name, build)
@@ -169,9 +171,9 @@ class Bot(commands.Bot):
 
     @commands.command()
     async def removebuild(self, ctx: commands.Context):
-        channel_name = ctx.channel.name.lower()
         if not ctx.author.is_mod:
             return
+        channel_name = ctx.channel.name.lower()
         build_name = ' '.join(ctx.message.content.split()[1:])
         try:
             self.remove_build(channel_name, build_name)
@@ -181,9 +183,9 @@ class Bot(commands.Bot):
 
     @commands.command()
     async def setbuild(self, ctx: commands.Context):
-        channel_name = ctx.channel.name.lower()
         if not ctx.author.is_mod:
             return
+        channel_name = ctx.channel.name.lower()
         build_name = ' '.join(ctx.message.content.split()[1:])
         try:
             self.set_build(channel_name, build_name)
@@ -193,6 +195,8 @@ class Bot(commands.Bot):
 
     @commands.command()
     async def renamebuild(self, ctx: commands.Context):
+        if not ctx.author.is_mod:
+            return
         channel_name = ctx.channel.name.lower()
         old_name = self.builds[channel_name][CURRENT_BUILD].name
         new_name = ' '.join(ctx.message.content.split()[1:])
@@ -222,12 +226,8 @@ class Bot(commands.Bot):
     @commands.command()
     async def builds(self, ctx: commands.Context):
         channel_name = ctx.channel.name.lower()
-        er_inventory_user_id = json.loads(os.environ["ER_INVENTORY_USER_IDS"]).get(channel_name, None)
-        if er_inventory_user_id is not None:
-            await ctx.send(
-                f'/me You can find my public builds here: '
-                f'{"https://er-inventory.nyasu.business/browse/" + er_inventory_user_id}'
-            )
+        build_list = self.get_build_list(channel_name)
+        await ctx.send('/me ' + ', '.join(build_list))
 
     @commands.command()
     async def setdccount(self, ctx: commands.Context):

@@ -1,4 +1,3 @@
-import json
 import os
 
 from config import get_config
@@ -6,12 +5,8 @@ from config import get_config
 
 if __name__ == '__main__':
     config = get_config()
-    for param, value in config.items():
-        if param in {'ER_INVENTORY_API_URL', 'ER_INVENTORY_AUTH_TOKEN'}:
-            os.environ[param] = value
-        if param == 'ER_INVENTORY_USER_IDS':
-            channel2uid = {channel.lower(): uid for channel, uid in value.items()}
-            os.environ[param] = json.dumps(channel2uid)
+    for param in ['ER_INVENTORY_API_URL', 'ER_INVENTORY_AUTH_TOKEN']:
+        os.environ[param] = config[param]
     from bot import Bot
     bot = Bot(
         token=config['ACCESS_TOKEN'],
