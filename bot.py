@@ -227,6 +227,9 @@ class Bot(commands.Bot):
     async def builds(self, ctx: commands.Context):
         channel_name = ctx.channel.name.lower()
         build_list = self.get_build_list(channel_name)
+        if not build_list:
+            await ctx.send('/me No builds are added yet.')
+            return
         await ctx.send('/me ' + ', '.join(build_list))
 
     @commands.command()
