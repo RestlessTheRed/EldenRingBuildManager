@@ -1,3 +1,4 @@
+from copy import deepcopy
 import json
 import math
 import os
@@ -112,6 +113,15 @@ class Bot(commands.Bot):
         self.builds[channel_name][CURRENT_BUILD] = self.builds[channel_name][build_name]
         self.dump_builds()
 
+    def rename_build(self, channel_name: str, old_name: str, new_name: str):
+        if new_name in self.builds[channel_name]:
+            raise ValueError('A build with this name already exists!')
+        self.builds[channel_name][new_name] = deepcopy(self.builds[channel_name][old_name])
+        del self.builds[channel_name][old_name]
+        self.builds[channel_name][new_name].name = new_name
+        self.builds[channel_name][CURRENT_BUILD] = self.builds[channel_name][new_name]
+        self.dump_builds()
+
     def get_current_build(self, channel_name: str):
         if CURRENT_BUILD in self.builds[channel_name]:
             return self.builds[channel_name][CURRENT_BUILD].print()
@@ -182,6 +192,17 @@ class Bot(commands.Bot):
             await ctx.send(str(exception))
 
     @commands.command()
+    async def renamebuild(self, ctx: commands.Context):
+        channel_name = ctx.channel.name.lower()
+        old_name = self.builds[channel_name][CURRENT_BUILD].name
+        new_name = ' '.join(ctx.message.content.split()[1:])
+        try:
+            self.rename_build(channel_name, old_name, new_name)
+            await ctx.send(f'/me Current build has been renamed to {new_name}.')
+        except Exception as exception:
+            await ctx.send(str(exception))
+
+    @commands.command()
     async def build(self, ctx: commands.Context):
         channel_name = ctx.channel.name.lower()
         await ctx.send('/me ' + self.get_current_build(channel_name))
@@ -241,10 +262,16 @@ class Bot(commands.Bot):
         runes = int(runes)
         phantom_type = message[2] if len(message) > 2 and message[2] in PHANTOM_TYPES else 'host'
         if phantom_type in INVADER_TYPES:
-            closest_value = find_closest(list(self.runes_for_invader.keys()), runes)
-            level = self.runes_for_invader[closest_value]
+            if runes < list(self.runes_for_invader.keys())[0]:
+                level = 1
+            else:
+                closest_value = find_closest(list(self.runes_for_invader.keys()), runes)
+                level = self.runes_for_invader[closest_value]
             await ctx.send(f"/me The invader's rune level was {level}.")
         else:
-            closest_value = find_closest(list(self.runes_for_host.keys()), runes)
-            level = self.runes_for_host[closest_value]
+            if runes < list(self.runes_for_host.keys())[0]:
+                level = 1
+            else:
+                closest_value = find_closest(list(self.runes_for_host.keys()), runes)
+                level = self.runes_for_host[closest_value]
             await ctx.send(f"/me The host's or phantom's rune level was {level}.")
