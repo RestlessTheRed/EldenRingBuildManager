@@ -113,7 +113,7 @@ Works the same way as Slugbot's **!igot**. Examples: `!igot 355,173`, `!igot 100
 If the phantom type is not provided, it assumes *host* as the phantom type. The formula is the exact same for killing hosts and their phantoms (furled fingers), but different for killing invaders.
 
 ## Credit
-The bot has been written by Restless, your humble servant, known as [restless__mind](https://www.twitch.tv/restless__mind) on Twitch. I also have a [YouTube](https://www.youtube.com/channel/UCgl8Ce_MBxeHVEmRyZtRuew). Here you can send me a [donation](https://www.donationalerts.com/r/restless__mind) if you feel like doing so (a notification will pop up if I'm live on Twitch).
+The bot has been written by Restless, your humble servant, known as [RestlessTheRed](https://www.twitch.tv/restlessthered) on Twitch. I also have a [YouTube](https://www.youtube.com/channel/UCgl8Ce_MBxeHVEmRyZtRuew). Here you can send me a [donation](https://www.donationalerts.com/r/restlessthered) if you feel like doing so (a notification will pop up if I'm live on Twitch).
 
 The bot is heavily integrated with [Elden Ring Build & Inventory Planner](https://er-inventory.nyasu.business/) made by the amazing Emilia aka [sovietspaceship](https://github.com/sovietspaceship) who also consulted me on its API. She [streams on Twitch](https://www.twitch.tv/sovietspaceship).
 
