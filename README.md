@@ -23,7 +23,7 @@ Here's an example of how a complete config file might look:
   "BOT_NICK": "restless__bot",
   "BOT_PREFIX": "!",
   "CHANNELS": [
-    "restless__mind"
+    "RestlessTheRED"
   ],
   "ER_INVENTORY_API_URL": "https://er-inventory-api.nyasu.business/inventories",
   "ER_INVENTORY_AUTH_TOKEN": "22ffd4a3-34c0-4989-9ec4-d9590b2e3bb4"
@@ -123,4 +123,4 @@ The bot uses [TwitchIO](https://github.com/PythonistaGuild/TwitchIO/tree/master)
 
 ## Feedback
 
-If you find any bugs or want to request new functionality being implemented, do not hesitate to contact me on Discord (`restless__mind`) or through my Twitch.
+If you find any bugs or want to request new functionality being implemented, do not hesitate to contact me on Discord (`RestlessTheRED`) or through my Twitch.
